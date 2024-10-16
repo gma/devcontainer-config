@@ -24,9 +24,9 @@ set -euo pipefail
 mkdir -p "$REPOS"
 
 clone_repo git@github.com:gma/dotfiles.git
-find "$REPOS/dotfiles" -maxdepth 1 -name \.\* -print | \
-    grep -v .gitconfig | \
-    xargs ln -sf -t ~
+# find "$REPOS/dotfiles" -maxdepth 1 -name \.\* -print | \
+#     grep -v .gitconfig | \
+#     xargs ln -sf -t ~
 ln -sf "$REPOS/dotfiles/base16-theme.vscode" ~/.config/base16-theme
 ln -sf "$REPOS/dotfiles/base16-theme.vscode" ~/.config/base16-theme.vscode
 
