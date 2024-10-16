@@ -21,7 +21,8 @@ source, and install my configuration by retrieving this repository.
 
     devcontainer up --workspace-folder . \
         --additional-features \
-        '{ "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {} }'
-        --dotfiles-repository https://github.com/gma/devcontainer-config
+        '{ "ghcr.io/duduribeiro/devcontainer-features/neovim:1": {} }' \
+        --dotfiles-repository git@github.com:gma/devcontainer-config.git \
+        --dotfiles-target-path ~/devcontainer-config
 
 [devcontainer CLI]: https://github.com/devcontainers/cli
