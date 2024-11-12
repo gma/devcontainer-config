@@ -8,10 +8,42 @@
 
 ## Functions
 
+log()
+{
+    echo "## $(basename "$0"): $*"
+}
+
+
 clone_repo()
 {
     local repo="$1"
-    git clone "$repo" "$REPOS/$(basename "$repo" .git)"
+    local target
+    target="$REPOS/$(basename "$repo" .git)"
+    if [ -d "$target" ]; then
+        log "Skipping clone of $repo: already exists"
+    else
+        git clone "$repo" "$target"
+    fi
+}
+
+
+install_ruby_tooling()
+{
+    log "Installing system gems"
+    gem install \
+        gem-browse \
+        gem-ctags \
+        neovim \
+        ripper-tags
+
+    local dest
+    dest="$HOME/.rbenv/plugins/rbenv-ctags"
+    if [ ! -d "$dest" ]; then
+        log "Installing rbenv ctags plugin"
+        mkdir -p ~/.rbenv/plugins
+        git clone https://github.com/tpope/rbenv-ctags.git "$dest"
+        rbenv ctags
+    fi
 }
 
 
@@ -32,3 +64,5 @@ ln -sf "$REPOS/dotfiles/base16-theme.vscode" ~/.config/base16-theme.vscode
 
 clone_repo git@github.com:gma/nvim-config.git
 mkdir -p ~/.config && ln -sf "$REPOS/nvim-config" ~/.config/nvim
+
+command -v rbenv >/dev/null && install_ruby_tooling
