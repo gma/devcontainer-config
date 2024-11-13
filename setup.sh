@@ -35,6 +35,7 @@ install_ruby_tooling()
         gem-ctags \
         neovim \
         ripper-tags
+    gem ctags
 
     local dest
     dest="$HOME/.rbenv/plugins/rbenv-ctags"
