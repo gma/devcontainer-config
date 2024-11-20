@@ -27,6 +27,29 @@ clone_repo()
 }
 
 
+persist_bundle_path_for_vim_bundler()
+{
+    # The vim-bundler Vim plugin doesn't support reading the BUNDLE_PATH
+    # environment variable (which is typically set via the bundler-cache
+    # devcontainer feature, that can be included in devcontainer.json, for
+    # Rails projects), so we'll have to write it to a config file for it.
+    # Otherwise, we won't be able to use vim-bundler to navigate the source in
+    # gems that have been installed in the bundle, despite us having gone to
+    # the trouble of create tags files by installing gem-ctags!
+    local config
+    config=".bundle/config"
+    if [ -n "$BUNDLE_PATH" ] && [ -f "$config" ]; then
+        mkdir -p "$(dirname "$config")"
+    cat <<EOF > "$config"
+---
+BUNDLE_PATH: "$BUNDLE_PATH"
+EOF
+    else
+        echo "WARNING: Not saving BUNDLE_PATH - vim-bundler could struggle" 1>&2
+    fi
+}
+
+
 install_ruby_tooling()
 {
     log "Installing system gems"
@@ -52,6 +75,8 @@ install_ruby_tooling()
             tag-bundled-gems || true
         fi
     fi
+
+    persist_bundle_path_for_vim_bundler
 }
 
 
