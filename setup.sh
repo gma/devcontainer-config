@@ -49,7 +49,7 @@ install_ruby_tooling()
         rbenv ctags
         if [ -f ~/Code/dotfiles/.bashrc-ruby ]; then
             source ~/Code/dotfiles/.bashrc-ruby
-            tag-bundled-gems
+            tag-bundled-gems || true
         fi
     fi
 }
