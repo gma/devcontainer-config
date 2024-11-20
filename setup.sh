@@ -40,7 +40,7 @@ install_ruby_tooling()
     dest="$HOME/.rbenv/plugins/rbenv-ctags"
     if [ ! -d "$dest" ]; then
         log "Installing rbenv ctags plugin"
-        mkdir -p ~/.rbenv/plugins
+        mkdir -p "$(dirname "$dest")"
         git clone https://github.com/tpope/rbenv-ctags.git "$dest"
     fi
 
