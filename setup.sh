@@ -98,4 +98,11 @@ ln -sf "$REPOS/dotfiles/base16-theme.vscode" ~/.config/base16-theme.vscode
 clone_repo git@github.com:gma/nvim-config.git
 mkdir -p ~/.config && ln -sf "$REPOS/nvim-config" ~/.config/nvim
 
+log "Fixing up Neovim colours"
+cat <<EOF >> ~/.bashrc
+
+export EDITOR=nvim
+export TERM=screen-256color
+EOF
+
 command -v rbenv >/dev/null && install_ruby_tooling
