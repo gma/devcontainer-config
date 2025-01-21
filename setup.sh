@@ -98,7 +98,7 @@ ln -sf "$REPOS/dotfiles/base16-theme.vscode" ~/.config/base16-theme.vscode
 clone_repo git@github.com:gma/nvim-config.git
 mkdir -p ~/.config && ln -sf "$REPOS/nvim-config" ~/.config/nvim
 log "Installing Neovim plugins with Lazy"
-nvim --headless "+Lazy! restore" +qa >/dev/null
+nvim --headless "+Lazy! restore" +qa >/dev/null 2>&1
 
 log "Fixing up Neovim colours"
 cat <<EOF >> ~/.bashrc
