@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # This script will be run automatically by the devcontainer cli, when this
 # repository is specified via the --dotfiles-repository switch.
